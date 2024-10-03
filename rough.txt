@@ -1,0 +1,150 @@
+ScaleTransition(
+          scale: _scaleAnimation,
+          child: Image.asset(
+              'assets/images/base_eclipse.png'), // Replace with your image path
+        ),
+
+
+
+
+        import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: ExpandingImagePage(),
+    );
+  }
+}
+
+class ExpandingImagePage extends StatefulWidget {
+  @override
+  _ExpandingImagePageState createState() => _ExpandingImagePageState();
+}
+
+class _ExpandingImagePageState extends State<ExpandingImagePage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1750),
+      vsync: this,
+    );
+
+    // Scaling animation that grows from 0.0 to 1.0
+    _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+
+    // Start the animation forward and do not reverse it.
+    _controller.forward().then((_) {
+      _controller
+          .dispose(); // Dispose of the controller after the animation completes
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Stack(
+          alignment: Alignment.center, // Center all images
+          children: [
+            // Base image at the bottom
+            ScaleTransition(
+              scale: _scaleAnimation,
+              child: Image.asset(
+                  'assets/images/base_eclipse.png'), // Original image
+            ),
+            // Second image overlapping
+            ScaleTransition(
+              scale: _scaleAnimation,
+              child: Image.asset(
+                  'assets/images/center_eclipse.png'), // Second additional image
+            ),
+            // First image overlapping
+            ScaleTransition(
+              scale: _scaleAnimation,
+              child: Image.asset(
+                  'assets/images/top_eclipse.png'), // First additional image
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+Positioned(
+              top: 30,
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage:
+                    AssetImage('assets/images/faceimg1.png'), // Face image 1
+              ),
+            ),
+            // Bottom face
+            Positioned(
+              bottom: 30,
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage:
+                    AssetImage('assets/images/faceimg2.png'), // Face image 2
+              ),
+            ),
+            // Left face
+            Positioned(
+              left: 30,
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage:
+                    AssetImage('assets/images/faceimg3.png'), // Face image 3
+              ),
+            ),
+            // Right face
+            Positioned(
+              right: 30,
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage:
+                    AssetImage('assets/images/faceimg4.png'), // Face image 4
+              ),
+            ),
+            // Top-left face
+            Positioned(
+              top: 80,
+              left: 80,
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage:
+                    AssetImage('assets/images/faceimg5.png'), // Face image 5
+              ),
+            ),
+            // Top-right face
+            Positioned(
+              top: 80,
+              right: 80,
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage('assets/images/faceimg6.png'),
+
+                // Face image 6
+              ),
+            ),
