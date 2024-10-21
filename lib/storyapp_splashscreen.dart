@@ -1,158 +1,3 @@
-ScaleTransition(
-          scale: _scaleAnimation,
-          child: Image.asset(
-              'assets/images/base_eclipse.png'), // Replace with your image path
-        ),
-
-
-
-
-        import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ExpandingImagePage(),
-    );
-  }
-}
-
-class ExpandingImagePage extends StatefulWidget {
-  @override
-  _ExpandingImagePageState createState() => _ExpandingImagePageState();
-}
-
-class _ExpandingImagePageState extends State<ExpandingImagePage>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 1750),
-      vsync: this,
-    );
-
-    // Scaling animation that grows from 0.0 to 1.0
-    _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
-
-    // Start the animation forward and do not reverse it.
-    _controller.forward().then((_) {
-      _controller
-          .dispose(); // Dispose of the controller after the animation completes
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Stack(
-          alignment: Alignment.center, // Center all images
-          children: [
-            // Base image at the bottom
-            ScaleTransition(
-              scale: _scaleAnimation,
-              child: Image.asset(
-                  'assets/images/base_eclipse.png'), // Original image
-            ),
-            // Second image overlapping
-            ScaleTransition(
-              scale: _scaleAnimation,
-              child: Image.asset(
-                  'assets/images/center_eclipse.png'), // Second additional image
-            ),
-            // First image overlapping
-            ScaleTransition(
-              scale: _scaleAnimation,
-              child: Image.asset(
-                  'assets/images/top_eclipse.png'), // First additional image
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-
-
-
-Positioned(
-              top: 30,
-              child: CircleAvatar(
-                radius: 30,
-                backgroundImage:
-                    AssetImage('assets/images/faceimg1.png'), // Face image 1
-              ),
-            ),
-            // Bottom face
-            Positioned(
-              bottom: 30,
-              child: CircleAvatar(
-                radius: 30,
-                backgroundImage:
-                    AssetImage('assets/images/faceimg2.png'), // Face image 2
-              ),
-            ),
-            // Left face
-            Positioned(
-              left: 30,
-              child: CircleAvatar(
-                radius: 30,
-                backgroundImage:
-                    AssetImage('assets/images/faceimg3.png'), // Face image 3
-              ),
-            ),
-            // Right face
-            Positioned(
-              right: 30,
-              child: CircleAvatar(
-                radius: 30,
-                backgroundImage:
-                    AssetImage('assets/images/faceimg4.png'), // Face image 4
-              ),
-            ),
-            // Top-left face
-            Positioned(
-              top: 80,
-              left: 80,
-              child: CircleAvatar(
-                radius: 30,
-                backgroundImage:
-                    AssetImage('assets/images/faceimg5.png'), // Face image 5
-              ),
-            ),
-            // Top-right face
-            Positioned(
-              top: 80,
-              right: 80,
-              child: CircleAvatar(
-                radius: 30,
-                backgroundImage: AssetImage('assets/images/faceimg6.png'),
-
-                // Face image 6
-              ),
-            ),
---------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math'; // For using pi
@@ -180,20 +25,18 @@ class _SplashScreenState extends State<SplashScreen>
       duration: Duration(milliseconds: 2500),
     );
 
-    // Define the gradient filling animation
+    // Gradient animation
     _animation = Tween<double>(begin: 0.0, end: 0.6).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
-    // Define the image zoom-out animation
+    // Image zoom-out animation
     _imageZoomAnimation = Tween<double>(begin: 1.5, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
         curve: Interval(0.4, 1.0, curve: Curves.easeOut),
       ),
     );
-
-    // Define the opacity animation for the image to make it visible when the zoom starts
     _imageOpacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
@@ -201,19 +44,17 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    // Define the container movement animation (Ellipse Gradient)
+    // Ellipse Gradient
     _containerPositionAnimation = Tween<double>(begin: 0.8, end: 0.34).animate(
       CurvedAnimation(
-          parent: _controller,
-          curve: Curves
-              .easeInOutCubic), // TIMING CONTROL FOR ELLIPSE GRADIENT MOVEMENT
+        parent: _controller,
+        curve: Interval(0.5, 1.0, curve: Curves.easeInOutCubic),
+      ),
     );
-
-    // Define the opacity animation for the container to fade in as it moves (Ellipse Gradient)
     _containerOpacityAnimation = Tween<double>(begin: 0.0, end: 0.20).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Curves.easeInOut, // TIMING CONTROL FOR ELLIPSE GRADIENT OPACITY
+        curve: Interval(0.5, 1.0, curve: Curves.easeInOut),
       ),
     );
 
@@ -238,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen>
                 color: Colors.black,
               ),
 
-              // Gradient filling from the top
+              // Background gradient
               Positioned.fill(
                 child: Align(
                   alignment: Alignment.topCenter,
@@ -259,15 +100,14 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
               ),
 
+              // Ellipse gradient animation
               Positioned(
                 top: MediaQuery.of(context).size.height *
-                    _containerPositionAnimation
-                        .value, // TIMING CONTROL FOR ELLIPSE GRADIENT MOVEMENT
+                    _containerPositionAnimation.value,
                 left: MediaQuery.of(context).size.width * 0.25,
                 right: MediaQuery.of(context).size.width * 0.25,
                 child: AnimatedOpacity(
-                  opacity: _containerOpacityAnimation
-                      .value, // OPACITY CONTROL FOR ELLIPSE GRADIENT
+                  opacity: _containerOpacityAnimation.value,
                   duration: Duration(milliseconds: 1000),
                   child: Transform.rotate(
                     angle: pi / 2,
@@ -291,6 +131,7 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
               ),
 
+              // App icon animation
               Positioned(
                 top: MediaQuery.of(context).size.height * 0.445,
                 left: MediaQuery.of(context).size.width * 0.25,
@@ -309,6 +150,7 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
               ),
 
+              // Extra icons
               _buildJumpingIcon(
                 context,
                 'assets/images/triicon.svg',
@@ -319,7 +161,6 @@ class _SplashScreenState extends State<SplashScreen>
                 iconSize: 21,
                 startAt: 0.9,
               ),
-
               _buildJumpingIcon(
                 context,
                 'assets/images/rocketicon.svg',
@@ -330,7 +171,6 @@ class _SplashScreenState extends State<SplashScreen>
                 iconSize: 15,
                 startAt: 0.9,
               ),
-
               _buildJumpingIcon(
                 context,
                 'assets/images/fanicon.svg',
@@ -341,7 +181,6 @@ class _SplashScreenState extends State<SplashScreen>
                 iconSize: 50,
                 startAt: 0.9,
               ),
-
               _buildJumpingIcon(
                 context,
                 'assets/images/candyicon.svg',
@@ -390,13 +229,13 @@ class _SplashScreenState extends State<SplashScreen>
               .value,
       child: AnimatedOpacity(
         opacity: _controller.value >= startAt ? 1 : 0.0,
-        duration: Duration(milliseconds: 750),
+        duration: Duration(milliseconds: 1250),
         child: Transform.scale(
           scale: Tween<double>(begin: 0.5, end: 1.0)
               .animate(
                 CurvedAnimation(
                   parent: _controller,
-                  curve: Interval(startAt, 1.0, curve: Curves.easeOutCirc),
+                  curve: Interval(startAt, 1.0, curve: Curves.easeIn),
                 ),
               )
               .value,

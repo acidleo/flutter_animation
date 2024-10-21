@@ -39,6 +39,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_svg: ^0.22.0
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -60,16 +62,16 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets\images\base_eclipse.png
-    - assets\images\center_eclipse.png
-    - assets\images\top_eclipse.png
-    - assets\images\faceimg1.png
-    - assets\images\faceimg2.png
-    - assets\images\faceimg3.png
-    - assets\images\faceimg4.png
-    - assets\images\faceimg5.png
-    - assets\images\faceimg6.png
-    - assets\images\mic.png
+    - assets\images\fanicon.svg
+    - assets\images\triicon.svg
+    - assets\images\candyicon.svg
+    - assets\images\rocketicon.svg
+    - assets\images\appIcon.svg
+    - assets\images\eclipse.svg
+
+
+
+  
   
 
   # An image asset can refer to one or more resolution-specific "variants", see
