@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'dart:math'; // For using pi
+import 'dart:math';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize: Size(1080, 2400),
+      designSize: Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
     );
@@ -92,7 +92,7 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Container(
-                    height: 2400.h * _animation.value,
+                    height: 812.h * _animation.value,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -109,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen>
 
               // Ellipse gradient animation
               Positioned(
-                top: 2400.h * _containerPositionAnimation.value,
+                top: 812.h * _containerPositionAnimation.value,
                 left: 0.25.sw,
                 right: 0.25.sw,
                 child: AnimatedOpacity(
@@ -139,7 +139,7 @@ class _SplashScreenState extends State<SplashScreen>
 
               // App icon animation
               Positioned(
-                top: 2400.h * 0.445,
+                top: 812.h * 0.445,
                 left: 0.25.sw,
                 right: 0.28.sw,
                 child: AnimatedOpacity(
@@ -164,7 +164,7 @@ class _SplashScreenState extends State<SplashScreen>
                 leftStart: 0.5,
                 topEnd: 0.455,
                 leftEnd: 0.52,
-                iconSize: 21.w, // Adjusted
+                iconSize: 21.w,
                 startAt: 0.9,
               ),
               _buildJumpingIcon(
@@ -174,7 +174,7 @@ class _SplashScreenState extends State<SplashScreen>
                 leftStart: 0.5,
                 topEnd: 0.53,
                 leftEnd: 0.70,
-                iconSize: 15.w, // Adjusted
+                iconSize: 15.w,
                 startAt: 0.9,
               ),
               _buildJumpingIcon(
@@ -184,7 +184,7 @@ class _SplashScreenState extends State<SplashScreen>
                 leftStart: 0.5,
                 topEnd: 0.49,
                 leftEnd: 0.23,
-                iconSize: 50.w, // Adjusted
+                iconSize: 50.w,
                 startAt: 0.9,
               ),
               _buildJumpingIcon(
@@ -194,7 +194,7 @@ class _SplashScreenState extends State<SplashScreen>
                 leftStart: 0.5,
                 topEnd: 0.59,
                 leftEnd: 0.6,
-                iconSize: 25.w, // Adjusted
+                iconSize: 25.w,
                 startAt: 0.9,
               ),
             ],
@@ -215,7 +215,7 @@ class _SplashScreenState extends State<SplashScreen>
     required double startAt,
   }) {
     return Positioned(
-      top: 2400.h *
+      top: 812.h *
           Tween<double>(begin: topStart, end: topEnd)
               .animate(
                 CurvedAnimation(
@@ -224,7 +224,7 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
               )
               .value,
-      left: 1080.w *
+      left: 375.w *
           Tween<double>(begin: leftStart, end: leftEnd)
               .animate(
                 CurvedAnimation(
